@@ -42,10 +42,10 @@ def cli():
     a = p.parse_args()
 
     if a.index:
-        index()
+        index(a.contacts, a.database)
 
     if a.mutt:
-        mutt()
+        mutt(a.contacts)
 
     if len(a.search) > 0:
-        search(a.search)
+        search(a.database, a.search)
