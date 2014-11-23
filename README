@@ -22,7 +22,7 @@ Save your contacts in ``~/.cbuh/contacts`` with the following format. ::
     email = someone@dada.pink
     # ...
 
-Run ``cbuh -h`` to see how to run. (Or look below.)
+Run ``cbuh -h`` to see how to run. (Or look below.) ::
 
     usage: cbuh [-h] [-s] [-m] [-c path] [-d path] [-p path] [-i]
                 [[search term] [[search term] ...]]
