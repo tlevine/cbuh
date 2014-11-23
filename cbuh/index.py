@@ -25,7 +25,7 @@ def index(contacts, database, prefixes):
         termgenerator.index_text(person, 1, u'id')
         for prefix, content in c.items(person):
             if prefix[0] in digits:
-                db.add_value(int(prefix[0]), prefix[1:])
+                doc.add_value(int(prefix[0]), xapian.sortable_serialise(int(content)))
             else:
                 termgenerator.index_text(content, 1, u'X' + prefix)
                 termgenerator.index_text(content)

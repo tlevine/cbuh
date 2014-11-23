@@ -14,7 +14,7 @@ def queryparser(prefixes):
     for prefix in prefixes:
         if prefix[0] in digits:
             proc = xapian.NumberValueRangeProcessor(int(prefix[0]), prefix[1:], True)
-            queryparser.add_valuerangeprocessor(proc)
+            q.add_valuerangeprocessor(proc)
         else:
             q.add_prefix(prefix, u'X' + prefix)
     return q
