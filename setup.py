@@ -16,6 +16,6 @@ setup(name='cbuh',
       version='0.0.1',
       license='AGPL',
       classifiers=[
-          'Programming Language :: Python :: 3.4',
+          'Programming Language :: Python :: 2.7',
       ],
 )
