@@ -8,16 +8,16 @@ def queryparser(prefixes):
     Takes a list of prefixes
     '''
     q = xapian.QueryParser()
-    q.set_stemmer(xapian.Stem('en'))
+    q.set_stemmer(xapian.Stem(u'en'))
     q.set_stemming_strategy(q.STEM_SOME)
     for prefix in prefixes:
-        q.add_prefix(prefix, prefix)
+        q.add_prefix(prefix, u'X' + prefix)
     return q
 
 def search(database, prefixes, search):
     db = xapian.Database(database)
 
-    with open(prefixes, 'r') as fp:
+    with open(prefixes, u'r') as fp:
         p = json.load(fp)
     q = queryparser(p)
 

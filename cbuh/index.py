@@ -4,6 +4,9 @@ import ConfigParser
 
 import xapian
 
+# This might be interesting eventually
+# http://xapian.org/docs/omega/termprefixes.html
+
 termgenerator = xapian.TermGenerator()
 termgenerator.set_stemmer(xapian.Stem("en"))
 
@@ -18,9 +21,9 @@ def index(contacts, database, prefixes):
         doc = xapian.Document()
         termgenerator.set_document(doc)
 
-        termgenerator.index_text(section, 1, 'id')
+        termgenerator.index_text(section, 1, u'id')
         for prefix, content in c.items(section):
-            termgenerator.index_text(content, 1, prefix)
+            termgenerator.index_text(content, 1, u'X' + prefix)
             termgenerator.index_text(content)
             termgenerator.increase_termpos()
             p.add(prefix)
@@ -31,3 +34,4 @@ def index(contacts, database, prefixes):
 
     with open(prefixes, 'wb') as fp:
         json.dump(list(p), fp)
+
