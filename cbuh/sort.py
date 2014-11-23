@@ -1,6 +1,7 @@
 import ConfigParser
 
 def sort(contacts):
+    raise NotImplementedError('This doesn\'t work if you use the same key multiple times.')
     old = ConfigParser.ConfigParser()
     old.read(contacts)
 
