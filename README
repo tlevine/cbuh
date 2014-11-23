@@ -1,6 +1,6 @@
 Dada contacts
 =================
-Save your contacts in ``~/.cbuh`` with the following format.
+Save your contacts in ``~/.cbuh/contacts`` with the following format.
 
     [thomas.levine]
     name = Thomas Levine
