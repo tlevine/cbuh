@@ -67,6 +67,6 @@ def cli():
         for person in search(a.database, a.prefixes, ' AND '.join(a.search)):
             sys.stdout.write(person + '\n')
 
-    if len(a.search) == 0 and (not a.mutt) and (not a.index):
+    if len(a.search) == 0 and (not a.mutt) and (not a.index) and (not a.sort):
         p.print_help()
         sys.exit(2)
