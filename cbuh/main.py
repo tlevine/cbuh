@@ -2,10 +2,10 @@ import os
 import sys
 import argparse
 
+from .mutt import mutt
 from .index import index
 from .search import search
 from .sort import sort
-#from .mutt import mutt
 
 def parser():
     DIR = os.path.expanduser('~/.cbuh')
@@ -61,7 +61,8 @@ def cli():
         index(a.contacts, a.database, a.prefixes)
 
     if a.mutt:
-        mutt(a.contacts)
+        for alias in mutt(a.contacts):
+            sys.stdout.write(alias + '\n')
 
     if len(a.search) > 0:
         for person in search(a.database, a.prefixes, ' AND '.join(a.search)):
