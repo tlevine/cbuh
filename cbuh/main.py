@@ -2,8 +2,8 @@ import os
 import argparse
 
 from .index import index
+from .search import search
 #from .mutt import mutt
-#from .search import search
 
 def parser():
     DIR = os.path.expanduser('~/.cbuh')
