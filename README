@@ -1,2 +1,19 @@
 Dada contacts
 =================
+Save your contacts in ``~/.cbuh`` with the following format.
+
+    [thomas.levine]
+    name = Thomas Levine
+    email = _@thomaslevine.com
+    phone = +1 831 713 1131
+    place = Scarsdale, New York
+    place = Ithaca, New York
+    place = New York, New York
+    place = Oakland, California
+    place = Berlin, Germany
+
+    [someone.else]
+    email = someone@dada.pink
+    # ...
+
+For commands, run ``cbuh -h``.
