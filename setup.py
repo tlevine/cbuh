@@ -7,7 +7,7 @@ setup(name='cbuh',
       url='https://github.com/tlevine/cbuh',
       packages=['cbuh'],
       install_requires = [
-          'xapian>=1.2', # 1.2.18
+#         'xapian>=1.2.18',
       ],
       scripts = [
           'bin/cbuh',

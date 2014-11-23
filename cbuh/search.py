@@ -25,10 +25,14 @@ def search(database, prefixes, search):
     enquire = xapian.Enquire(db)
     enquire.set_query(query)
 
+    persons = set()
     for offset in itertools.count(0, 1):
         matches = enquire.get_mset(offset, 100)
         if matches.size() > 0:
             for match in matches:
-                yield match.document.get_data()
+                person = match.document.get_data()
+                if person not in persons:
+                    persons.add(person)
+                    yield person
         else:
             break
