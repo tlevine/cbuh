@@ -7,12 +7,11 @@ setup(name='cbuh',
       url='https://github.com/tlevine/cbuh',
       packages=['cbuh'],
       install_requires = [
-          'xapian',
+          'xapian>=1.2', # 1.2.18
       ],
       scripts = [
           'bin/cbuh',
       ],
-      tests_require = ['nose'],
       version='0.0.1',
       license='AGPL',
       classifiers=[
