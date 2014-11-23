@@ -4,6 +4,7 @@ import argparse
 
 from .index import index
 from .search import search
+from .sort import sort
 #from .mutt import mutt
 
 def parser():
@@ -26,16 +27,24 @@ will also match everyone who lives in San Francisco.
 '''
     p = argparse.ArgumentParser(description = 'Query the contact list.',
         epilog = epilog, formatter_class = argparse.RawDescriptionHelpFormatter)
+
+    # Import and export
+    p.add_argument('-s', '--sort', action = 'store_true', default = False,
+        help = 'Sort the contacts file by person identifier.')
     p.add_argument('-m', '--mutt', action = 'store_true', default = False,
         help = 'Export the contact list as a mutt alias file.')
-    p.add_argument('-i', '--index', action = 'store_true', default = False,
-        help = 'Index the contact list.')
+
+    # Files
     p.add_argument('-c', '--contacts', metavar = 'path', action = 'store',
         default = os.path.join(DIR, 'contacts'), help = 'The contacts file')
     p.add_argument('-d', '--database', metavar = 'path', action = 'store',
         default = os.path.join(DIR, 'db'), help = 'The database directory')
     p.add_argument('-p', '--prefixes', metavar = 'path', action = 'store',
         default = os.path.join(DIR, 'prefixes'), help = 'The prefixes file')
+
+    # Search
+    p.add_argument('-i', '--index', action = 'store_true', default = False,
+        help = 'Index the contact list.')
     p.add_argument('search', metavar = '[search term]', nargs = '*',
         help = 'The search terms, if you\'re running a search')
     return p
@@ -44,6 +53,9 @@ will also match everyone who lives in San Francisco.
 def cli():
     p = parser()
     a = p.parse_args()
+
+    if a.sort:
+        sort(a.contacts)
 
     if a.index:
         index(a.contacts, a.database, a.prefixes)
