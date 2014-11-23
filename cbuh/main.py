@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 
 from .index import index
@@ -9,7 +10,8 @@ def parser():
     DIR = os.path.expanduser('~/.cbuh')
     epilog = '''
 Search the contact list in ~/.cbuh/contacts. The search is an ordinary Xapian
-query (http://xapian.org/docs/queryparser.html) with some prefixed terms.
+query (http://xapian.org/docs/queryparser.html) with whatever prefixed terms
+you like. I suggest these.
 
 * id
 * name
@@ -32,6 +34,8 @@ will also match everyone who lives in San Francisco.
         default = os.path.join(DIR, 'contacts'), help = 'The contacts file')
     p.add_argument('-d', '--database', metavar = 'path', action = 'store',
         default = os.path.join(DIR, 'db'), help = 'The database directory')
+    p.add_argument('-p', '--prefixes', metavar = 'path', action = 'store',
+        default = os.path.join(DIR, 'prefixes'), help = 'The prefixes file')
     p.add_argument('search', metavar = '[search term]', nargs = '*',
         help = 'The search terms, if you\'re running a search')
     return p
@@ -42,10 +46,15 @@ def cli():
     a = p.parse_args()
 
     if a.index:
-        index(a.contacts, a.database)
+        index(a.contacts, a.database, a.prefixes)
 
     if a.mutt:
         mutt(a.contacts)
 
     if len(a.search) > 0:
-        search(a.database, a.search)
+        for person in search(a.database, a.prefixes, ' AND '.join(a.search)):
+            sys.stdout.write(person + '\n')
+
+    if len(a.search) == 0 and (not a.mutt) and (not a.index):
+        p.print_help()
+        sys.exit(2)

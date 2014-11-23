@@ -1,9 +1,34 @@
-queryparser = xapian.QueryParser()
-queryparser.set_stemmer(xapian.Stem("en"))
-queryparser.set_stemming_strategy(queryparser.STEM_SOME)
-queryparser.add_prefix("title", "S")
-queryparser.add_prefix("description", "XD")
-queryparser.add_boolean_prefix('id')
+import itertools
+import json
 
-def search(database, search)
+import xapian
+
+def queryparser(prefixes):
+    '''
+    Takes a list of prefixes
+    '''
+    q = xapian.QueryParser()
+    q.set_stemmer(xapian.Stem('en'))
+    q.set_stemming_strategy(q.STEM_SOME)
+    for prefix in prefixes:
+        q.add_prefix(prefix, prefix)
+    return q
+
+def search(database, prefixes, search):
     db = xapian.Database(database)
+
+    with open(prefixes, 'r') as fp:
+        p = json.load(fp)
+    q = queryparser(p)
+
+    query = q.parse_query(search)
+    enquire = xapian.Enquire(db)
+    enquire.set_query(query)
+
+    for offset in itertools.count(0, 1):
+        matches = enquire.get_mset(offset, 100)
+        if matches.size() > 0:
+            for match in matches:
+                yield match.document.get_data()
+        else:
+            break
