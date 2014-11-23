@@ -11,11 +11,7 @@ Save your contacts in ``~/.cbuh/contacts`` with the following format. ::
     name = Thomas Levine
     email = _@thomaslevine.com
     phone = +1 831 713 1131
-    place = Scarsdale, New York
-    place = Ithaca, New York
-    place = New York, New York
-    place = Oakland, California
-    place = Berlin, Germany
+    place = Scarsdale; Ithaca; New York; Oakland, California; Berlin, Germany
     6birthday = 19900330
 
     [someone.else]
