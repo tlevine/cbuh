@@ -20,7 +20,7 @@ will also match everyone who lives in San Francisco.
         epilog = epilog, formatter_class = argparse.RawDescriptionHelpFormatter)
     p.add_argument('-m', '--mutt', action = 'store_true', default = False,
         help = 'Export the contact list as a mutt alias file.')
-    p.add_argument('search', metavar = '[search term]', nargs = '+',
+    p.add_argument('search', metavar = '[search term]', nargs = '*',
         help = 'The search terms, if you\'re running a search')
     return p
 
