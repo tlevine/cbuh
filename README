@@ -1,11 +1,11 @@
 Dada contacts
 =================
-Install Xapian and cbuh. In Arch Linux, I do this.
+Install Xapian and cbuh. In Arch Linux, I do this. ::
 
     sudo pacman -S python2-xapian
     sudo pip2 install cbuh
 
-Save your contacts in ``~/.cbuh/contacts`` with the following format.
+Save your contacts in ``~/.cbuh/contacts`` with the following format. ::
 
     [thomas.levine]
     name = Thomas Levine
@@ -16,6 +16,7 @@ Save your contacts in ``~/.cbuh/contacts`` with the following format.
     place = New York, New York
     place = Oakland, California
     place = Berlin, Germany
+    2birthday = 19900330
 
     [someone.else]
     email = someone@dada.pink

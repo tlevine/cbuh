@@ -12,8 +12,11 @@ def queryparser(prefixes):
     q.set_stemmer(xapian.Stem(u'en'))
     q.set_stemming_strategy(q.STEM_SOME)
     for prefix in prefixes:
-        if prefix[0] in digits:
+        if prefix[0] in digits[:5]:
             proc = xapian.NumberValueRangeProcessor(int(prefix[0]), prefix[1:], True)
+            q.add_valuerangeprocessor(proc)
+        elif prefix[0] in digits[5:]:
+            proc = xapian.DateValueRangeProcessor(int(prefix[0]), prefix[1:], True)
             q.add_valuerangeprocessor(proc)
         else:
             q.add_prefix(prefix, u'X' + prefix)

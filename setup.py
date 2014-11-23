@@ -6,9 +6,9 @@ setup(name='cbuh',
       description='Tom\'s contact list',
       url='https://github.com/tlevine/cbuh',
       packages=['cbuh'],
-      install_requires = [
+#     install_requires = [
 #         'xapian>=1.2.18',
-      ],
+#     ],
       scripts = [
           'bin/cbuh',
       ],
