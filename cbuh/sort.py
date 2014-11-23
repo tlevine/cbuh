@@ -1,18 +1,17 @@
+from collections import defaultdict
+from .config import config
 import ConfigParser
 
 def sort(contacts):
-    raise NotImplementedError('This doesn\'t work if you use the same key multiple times.')
-    old = ConfigParser.ConfigParser()
-    old.read(contacts)
-
-    sections = list(sorted(old.sections()))
-    data = [old.items(section) for section in sections]
-
+    old = config(contacts)
     new = ConfigParser.ConfigParser()
-    for section, data in zip(sections, data):
+    for section, olddata in sorted(old):
         new.add_section(section)
-        for key, value in data:
-            new.set(section, key, value)
+        newdata = defaultdict(list)
+        for key, value in olddata:
+            newdata[key].append(value)
+        for key, values in sorted(newdata.items()):
+            new.set(section, key, '; '.join(values))
     
     with open(contacts, 'w') as fp:
         new.write(fp)

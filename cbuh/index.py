@@ -1,6 +1,6 @@
 import os
 import json
-import ConfigParser
+from .config import config
 from string import digits
 
 import xapian
@@ -12,18 +12,17 @@ termgenerator = xapian.TermGenerator()
 termgenerator.set_stemmer(xapian.Stem("en"))
 
 def index(contacts, database, prefixes):
-    c = ConfigParser.ConfigParser()
-    c.read(contacts)
+    c = config(contacts)
 
     db = xapian.WritableDatabase(database, xapian.DB_CREATE_OR_OPEN)
 
     p = set()
-    for person in c.sections():
+    for person, data in c:
         doc = xapian.Document()
         termgenerator.set_document(doc)
 
         termgenerator.index_text(person, 1, u'id')
-        for prefix, content in c.items(person):
+        for prefix, content in data:
             if prefix[0] in digits[:5]:
                 doc.add_value(int(prefix[0]), xapian.sortable_serialise(int(content)))
             elif prefix[0] in digits[5:]:
