@@ -24,6 +24,10 @@ If you apply these prefixes, you search within that field only;
 for example, "name:Francisco" searches for people with names like
 "Francisco". Searching for simply "Francisco", on the other hand,
 will also match everyone who lives in San Francisco.
+
+Prefixes that start with single digits are treated as values, with the digit
+being the slot. For example, I use ``1want`` to indicate how much I want to
+see someone, so I can search for people I really want to see with ``want20..``.
 '''
     p = argparse.ArgumentParser(description = 'Query the contact list.',
         epilog = epilog, formatter_class = argparse.RawDescriptionHelpFormatter)
