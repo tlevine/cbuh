@@ -1,5 +1,9 @@
 import argparse
 
+from .index import index
+#from .mutt import mutt
+#from .search import search
+
 def parser():
     epilog = '''
 Search the contact list in ~/.cbuh. The search is an ordinary Xapian
@@ -20,6 +24,8 @@ will also match everyone who lives in San Francisco.
         epilog = epilog, formatter_class = argparse.RawDescriptionHelpFormatter)
     p.add_argument('-m', '--mutt', action = 'store_true', default = False,
         help = 'Export the contact list as a mutt alias file.')
+    p.add_argument('-i', '--index', action = 'store_true', default = False,
+        help = 'Index the contact list.')
     p.add_argument('search', metavar = '[search term]', nargs = '*',
         help = 'The search terms, if you\'re running a search')
     return p
@@ -27,4 +33,13 @@ will also match everyone who lives in San Francisco.
 
 def cli():
     p = parser()
-    p.parse_args()
+    a = p.parse_args()
+
+    if a.index:
+        index()
+
+    if a.mutt:
+        mutt()
+
+    if len(a.search) > 0:
+        search(a.search)
